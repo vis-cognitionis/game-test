@@ -1,12 +1,13 @@
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native";
 import Header from "../components/header";
+import GameList from "../components/game_list";
 
 const MainScreen = () => {
   return (
     <SafeAreaView>
       <Header />
-      <ScrollView contentInsetAdjustmentBehavior="automatic"></ScrollView>
+      <GameList />
     </SafeAreaView>
   );
 };
