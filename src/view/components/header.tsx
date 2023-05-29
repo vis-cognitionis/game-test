@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  Button,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Pressable, SafeAreaView, StyleSheet } from "react-native";
+
 import { IconFilterSort, IconGameTest } from "./icons";
+import { useGameData } from "../../queries/useGameData";
 
 const HeaderStyles = () => {
   return StyleSheet.create({
@@ -36,6 +32,8 @@ const HeaderStyles = () => {
 
 const Header = () => {
   const styles = HeaderStyles();
+
+  const gameData = useGameData();
 
   return (
     <SafeAreaView style={styles.container}>
