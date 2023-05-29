@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, SafeAreaView, StyleSheet, Text } from "react-native";
+import {
+  Button,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+} from "react-native";
+import { IconFilterSort, IconGameTest } from "./icons";
 
 const HeaderStyles = () => {
   return StyleSheet.create({
@@ -9,12 +16,20 @@ const HeaderStyles = () => {
       justifyContent: "space-between",
       height: 100,
       paddingVertical: 0,
-      paddingHorizontal: 16,
-      backgroundColor: "pink",
+      paddingHorizontal: 24,
+      backgroundColor: "rgba(252, 76, 2, 0.1)",
     },
     text: {
       paddingTop: 10,
       fontSize: 18,
+    },
+    button: {
+      justifyContent: "center",
+      paddingLeft: 9,
+      width: 36,
+      height: 36,
+      borderRadius: 12,
+      backgroundColor: "rgba(252, 76, 2, 0.35)",
     },
   });
 };
@@ -24,8 +39,10 @@ const Header = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}> GAME TEST APP</Text>
-      <Button title="Filter" />
+      <IconGameTest />
+      <Pressable style={styles.button}>
+        <IconFilterSort />
+      </Pressable>
     </SafeAreaView>
   );
 };
