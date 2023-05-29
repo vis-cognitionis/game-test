@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
 import Header from "../components/header";
-import GameList from "../components/game_list";
+import GameList from "../components/game-list/game_list";
 
 const MainScreen = () => {
   return (
