@@ -5,18 +5,15 @@ import GameCard from "./game_card";
 import GameProps from "../../../interface/interface";
 import { useGameData } from "../../../queries/useGameData";
 
-const GameListStyles = () => {
-  return StyleSheet.create({
-    container: {
-      height: "80%",
-      paddingHorizontal: 24,
-    },
-  });
-};
+const styles = StyleSheet.create({
+  container: {
+    height: "80%",
+    paddingHorizontal: 24,
+  },
+});
 
 const GameList = () => {
   const data = useGameData();
-  const styles = GameListStyles();
 
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
@@ -36,7 +33,7 @@ const GameList = () => {
       renderItem={renderItem}
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}
-    ></FlatList>
+    />
   );
 };
 export default GameList;

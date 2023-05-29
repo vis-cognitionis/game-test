@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import {
   FlatList,
   Pressable,
@@ -10,37 +10,38 @@ import { IconFilterSort, IconGameTest } from "./icons";
 import { useGameData } from "../../queries/useGameData";
 import Chip from "./filter-sort/chip";
 
-const HeaderStyles = () => {
-  return StyleSheet.create({
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      height: 100,
-      paddingVertical: 0,
-      paddingHorizontal: 24,
-    },
-    headerContainer: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
-    chipContainer: {
-      paddingTop: 16,
-    },
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    height: 100,
+    paddingVertical: 0,
+    paddingHorizontal: 24,
+  },
+  headerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  chipContainer: {
+    paddingTop: 16,
+  },
 
-    button: {
-      justifyContent: "center",
-      paddingLeft: 9,
-      width: 36,
-      height: 36,
-      borderRadius: 12,
-      backgroundColor: "rgba(252, 76, 2, 0.35)",
-    },
-  });
-};
+  button: {
+    justifyContent: "center",
+    paddingLeft: 9,
+    width: 36,
+    height: 36,
+    borderRadius: 12,
+    backgroundColor: "rgba(252, 76, 2, 0.35)",
+  },
+});
 
-const Header = () => {
-  const styles = HeaderStyles();
+const Header = ({
+  setModalOpen,
+}: {
+  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
+}) => {
   const gameData = useGameData();
 
   const mockData = [
@@ -51,7 +52,7 @@ const Header = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <IconGameTest />
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={() => setModalOpen(true)}>
           <IconFilterSort />
         </Pressable>
       </View>
