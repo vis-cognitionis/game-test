@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   View,
   Modal,
@@ -7,7 +7,6 @@ import {
   Animated,
   Text,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 
 import { useGameData } from "../../../queries/useGameData";
@@ -44,24 +43,24 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     }
   }, [visible, translateY]);
 
-  const RowItem = ({
-    title,
-    children,
-  }: {
-    title: string;
-    children: React.ReactNode;
-  }) => {
-    return (
-      <View style={styles.rowItemContainer}>
-        <Text style={styles.subheading}>{title}</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity activeOpacity={1} style={styles.chipContainer}>
-            {children}
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-    );
-  };
+  const RowItem = useMemo(
+    () =>
+      ({ title, children }: { title: string; children: React.ReactNode }) => {
+        return (
+          <View style={styles.rowItemContainer}>
+            <Text style={styles.subheading}>{title}</Text>
+            <ScrollView
+              contentContainerStyle={styles.chipContainer}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {children}
+            </ScrollView>
+          </View>
+        );
+      },
+    []
+  );
 
   const categories =
     gameData && Array.from(new Set(gameData.map((game) => game.genre)));
@@ -76,8 +75,7 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     { name: "Z-A", label: "z-a" },
   ];
 
-  const { selectedFilters, selectedSort, setSelectedFilters, setSelectedSort } =
-    useAppContext();
+  const { setSelectedFilters, setSelectedSort } = useAppContext();
 
   const [chipsSelectedFilters, setChipsSelectedFilters] = useState<string[]>(
     []
@@ -108,8 +106,10 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
 
   const handleReset = () => {
     setChipsSelectedFilters([]);
+    setChipsSelectedSorts([]);
     setSelectedFilters([]);
     setSelectedSort("");
+    handleModalClose();
   };
 
   return (
@@ -128,10 +128,10 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
                     <Chip
                       key={category}
                       content={category}
-                      // selected={chipsSelectedFilters.includes(category)}
                       onPress={() => {
                         handleFilter(category);
                       }}
+                      selected={chipsSelectedFilters.includes(category)}
                     />
                   ))}
                   title="Categories"
@@ -141,7 +141,7 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
                     <Chip
                       key={platform}
                       content={platform}
-                      // selected={chipsSelectedFilters.includes(platform)}
+                      selected={chipsSelectedFilters.includes(platform)}
                       onPress={() => {
                         handleFilter(platform);
                       }}
@@ -154,7 +154,7 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
                     <Chip
                       key={sort.label}
                       content={sort.name}
-                      // selected={chipsSelectedSorts.includes(sort.item)}
+                      selected={chipsSelectedSorts.includes(sort.label)}
                       onPress={() => {
                         handleSort(sort.label);
                       }}
@@ -216,9 +216,8 @@ const styles = StyleSheet.create({
   chipContainer: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    gap: 16,
+    gap: 12,
   },
 
   title: {
@@ -247,8 +246,7 @@ const styles = StyleSheet.create({
   rowItemContainer: {
     display: "flex",
     flexDirection: "column",
-    height: 60,
-    justifyContent: "center",
+    height: 70,
   },
 
   rowItemsContainer: {
@@ -257,6 +255,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     rowGap: 18,
     width: "100%",
+  },
+
+  scrollContainer: {
+    flexGrow: 1,
+    overflow: "hidden",
   },
 });
 

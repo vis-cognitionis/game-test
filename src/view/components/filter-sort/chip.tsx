@@ -4,9 +4,11 @@ import { Text, StyleSheet, Pressable } from "react-native";
 const Chip = ({
   content,
   onPress,
+  selected,
 }: {
   content?: string;
   onPress?: () => void;
+  selected: boolean;
 }) => {
   const styles = StyleSheet.create({
     container: {
@@ -16,14 +18,14 @@ const Chip = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      // backgroundColor: "#FC4C02",
+      backgroundColor: selected ? "#FC4C02" : "#FFFFFF",
       borderWidth: 2,
       borderColor: "#FC4C02",
       borderRadius: 50,
       paddingHorizontal: 10,
     },
     content: {
-      color: "#FC4C02",
+      color: selected ? "#FFFFFF" : "#FC4C02",
       fontSize: 12,
     },
   });
