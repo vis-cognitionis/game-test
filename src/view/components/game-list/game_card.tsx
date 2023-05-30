@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
 
-import LoadingAnimationView from "./loading_animation";
+import { useGameData } from "../../../queries/useGameData";
 
 export interface CardProps {
   imgSrc: string;
@@ -24,15 +24,15 @@ const GameCard = ({
   };
 
   const [imageLoading, setImageLoading] = useState<boolean>(true);
-
   return (
     <View style={styles.container}>
-      {imageLoading && <LoadingAnimationView />}
+      {imageLoading && <View style={styles.loadingBox} />}
       <Image
         style={styles.image}
         source={{ uri: imgSrc }}
         onLoad={() => setImageLoading(false)}
       />
+
       <View style={styles.textContainer}>
         <Text style={styles.textTitle}>{limitTitle(gameTitle, 11)}</Text>
         <Text> {gamePlatform} </Text>
@@ -72,6 +72,13 @@ const styles = StyleSheet.create({
     color: "#424242",
     fontWeight: "bold",
     paddingBottom: 16,
+  },
+
+  loadingBox: {
+    width: "100%",
+    height: 110,
+    borderRadius: 16,
+    backgroundColor: "rgba(252, 76, 2, 0.4)",
   },
 });
 

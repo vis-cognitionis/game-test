@@ -1,5 +1,10 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import {
+  RefreshControl,
+  StyleSheet,
+  View,
+  VirtualizedList,
+} from "react-native";
 
 import GameCard from "./game_card";
 import GameCardProps from "../../../interface/interface";
@@ -11,20 +16,16 @@ const GameList = () => {
   const { refetch } = useGameData();
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
-  const renderItem = useMemo(
-    () =>
-      ({ item }: { item: GameCardProps }) => {
-        return (
-          <GameCard
-            gameCategory={item.genre}
-            gamePlatform={item.platform}
-            gameTitle={item.title}
-            imgSrc={item.thumbnail}
-          />
-        );
-      },
-    []
-  );
+  const renderItem = ({ item }: { item: GameCardProps }) => {
+    return (
+      <GameCard
+        gameCategory={item.genre}
+        gamePlatform={item.platform}
+        gameTitle={item.title}
+        imgSrc={item.thumbnail}
+      />
+    );
+  };
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
@@ -36,8 +37,17 @@ const GameList = () => {
     }, 2000);
   }, []);
 
+  const getItemCount = useCallback(
+    () => filteredGameCardList.length,
+    [filteredGameCardList]
+  );
+  const getItem = useCallback(
+    (_: any, index: number) => filteredGameCardList[index],
+    [filteredGameCardList]
+  );
+
   return (
-    <FlatList
+    <VirtualizedList
       style={styles.container}
       data={filteredGameCardList}
       renderItem={renderItem}
@@ -47,6 +57,8 @@ const GameList = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
+      getItemCount={getItemCount}
+      getItem={getItem}
     />
   );
 };
