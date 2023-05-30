@@ -6,9 +6,75 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+
 import { IconFilterSort, IconGameTest } from "./icons";
-import { useGameData } from "../../queries/useGameData";
+import { useAppContext } from "../../view-model/app_context";
 import Chip from "./filter-sort/chip";
+
+const Header = ({
+  setModalOpen,
+}: {
+  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
+}) => {
+  const {
+    selectedFilters,
+    selectedSort,
+    setSelectedFilters,
+    setSelectedSort,
+    setChipsSelectedFilters,
+    setChipsSelectedSorts,
+  } = useAppContext();
+
+  const chips = selectedFilters
+    .concat(selectedSort ? [selectedSort] : [])
+    .reverse();
+
+  const handleReset = (item: string) => {
+    {
+      if (selectedFilters.includes(item)) {
+        const updatedFilters = selectedFilters.filter(
+          (filter) => filter !== item
+        );
+        setSelectedFilters(updatedFilters);
+        setChipsSelectedFilters(updatedFilters);
+      } else if (selectedSort === item) {
+        setSelectedSort("");
+        setChipsSelectedSorts([]);
+      }
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerContainer}>
+        <IconGameTest />
+        <Pressable style={styles.button} onPress={() => setModalOpen(true)}>
+          <IconFilterSort />
+        </Pressable>
+      </View>
+
+      <FlatList
+        horizontal
+        contentContainerStyle={styles.chipContainer}
+        data={chips}
+        renderItem={({ item }) => (
+          <Chip
+            selected={selectedFilters.includes(item) || selectedSort === item}
+            key={item}
+            content={item}
+            isFiltered={true}
+            onPressClose={() => handleReset(item)}
+          />
+        )}
+        keyExtractor={(item) => item}
+        ItemSeparatorComponent={() => <View style={{ marginRight: 8 }} />}
+        showsHorizontalScrollIndicator={false}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default Header;
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +92,6 @@ const styles = StyleSheet.create({
   chipContainer: {
     paddingTop: 16,
   },
-
   button: {
     justifyContent: "center",
     paddingLeft: 9,
@@ -36,36 +101,3 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(252, 76, 2, 0.35)",
   },
 });
-
-const Header = ({
-  setModalOpen,
-}: {
-  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
-}) => {
-  const gameData = useGameData();
-
-  const mockData = [
-    { id: 1, genre: "Shooting" },
-    { id: 2, genre: "Nature" },
-  ];
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <IconGameTest />
-        <Pressable style={styles.button} onPress={() => setModalOpen(true)}>
-          <IconFilterSort />
-        </Pressable>
-      </View>
-      {/* <FlatList
-        horizontal
-        contentContainerStyle={styles.chipContainer}
-        data={mockData}
-        renderItem={({ item }) => <Chip key={item.id} />}
-        keyExtractor={(item) => item.id.toString()}
-        ItemSeparatorComponent={() => <View style={{ marginRight: 20 }} />}
-      /> */}
-    </SafeAreaView>
-  );
-};
-
-export default Header;

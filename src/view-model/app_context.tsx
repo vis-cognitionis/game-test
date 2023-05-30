@@ -10,6 +10,10 @@ interface AppContextProps {
   setSelectedFilters: React.Dispatch<SetStateAction<string[]>>;
   selectedSort: string;
   setSelectedSort: React.Dispatch<React.SetStateAction<string>>;
+  chipsSelectedFilters: string[];
+  setChipsSelectedFilters: React.Dispatch<SetStateAction<string[]>>;
+  chipsSelectedSorts: string[];
+  setChipsSelectedSorts: React.Dispatch<SetStateAction<string[]>>;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -29,6 +33,10 @@ interface AppProviderProps {
 const AppProvider = ({ children }: AppProviderProps) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [selectedSort, setSelectedSort] = useState<string>("");
+  const [chipsSelectedFilters, setChipsSelectedFilters] = useState<string[]>(
+    []
+  );
+  const [chipsSelectedSorts, setChipsSelectedSorts] = useState<string[]>([]);
 
   return (
     <AppContext.Provider
@@ -37,6 +45,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
         setSelectedFilters,
         selectedSort,
         setSelectedSort,
+        chipsSelectedFilters,
+        setChipsSelectedFilters,
+        chipsSelectedSorts,
+        setChipsSelectedSorts,
       }}
     >
       {children}

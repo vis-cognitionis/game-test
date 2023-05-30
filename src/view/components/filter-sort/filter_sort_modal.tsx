@@ -68,19 +68,16 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
   const platforms =
     gameData && Array.from(new Set(gameData.map((game) => game.platform)));
 
-  const sortItems = [
-    { name: "Latest Release", label: "new-to-old" },
-    { name: "Oldest Release", label: "old-to-new" },
-    { name: "A-Z", label: "a-z" },
-    { name: "Z-A", label: "z-a" },
-  ];
+  const sortItems = ["Latest Release", "Oldest Release", "A-Z", "Z-A"];
 
-  const { setSelectedFilters, setSelectedSort } = useAppContext();
-
-  const [chipsSelectedFilters, setChipsSelectedFilters] = useState<string[]>(
-    []
-  );
-  const [chipsSelectedSorts, setChipsSelectedSorts] = useState<string[]>([]);
+  const {
+    setSelectedFilters,
+    setSelectedSort,
+    chipsSelectedFilters,
+    setChipsSelectedFilters,
+    chipsSelectedSorts,
+    setChipsSelectedSorts,
+  } = useAppContext();
 
   const handleFilter = (item: string) => {
     const updatedSelectedFilters = chipsSelectedFilters.includes(item)
@@ -109,12 +106,18 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     setChipsSelectedSorts([]);
     setSelectedFilters([]);
     setSelectedSort("");
-    handleModalClose();
+    (chipsSelectedFilters.length > 0 || chipsSelectedSorts.length > 0) &&
+      handleModalClose();
   };
 
   return (
     <Modal visible={visible} transparent animationType="none">
-      <TouchableWithoutFeedback onPress={handleModalClose}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          handleModalClose();
+          handleApply();
+        }}
+      >
         <View style={styles.modalContainer}>
           <TouchableWithoutFeedback>
             <Animated.View
@@ -152,11 +155,11 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
                 <RowItem
                   children={sortItems?.map((sort) => (
                     <Chip
-                      key={sort.label}
-                      content={sort.name}
-                      selected={chipsSelectedSorts.includes(sort.label)}
+                      key={sort}
+                      content={sort}
+                      selected={chipsSelectedSorts.includes(sort)}
                       onPress={() => {
-                        handleSort(sort.label);
+                        handleSort(sort);
                       }}
                     />
                   ))}

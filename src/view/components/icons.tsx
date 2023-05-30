@@ -74,3 +74,16 @@ export const IconFilterSort = () => {
     </Svg>
   );
 };
+
+export const IconClose = () => {
+  return (
+    <Svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <Path
+        d="M11 1L1 11M1 1L11 11"
+        stroke="white"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </Svg>
+  );
+};

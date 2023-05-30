@@ -24,22 +24,22 @@ export const useFilterSort = () => {
   let filteredGameCardList = getFilteredGameCards(gameData || []);
 
   switch (selectedSort) {
-    case "new-to-old":
+    case "Latest Release":
       filteredGameCardList = filteredGameCardList.sort((a, b) =>
         a.release_date < b.release_date ? 1 : -1
       );
       break;
-    case "old-to-new":
+    case "Oldest Release":
       filteredGameCardList = filteredGameCardList.sort((a, b) =>
         a.release_date > b.release_date ? 1 : -1
       );
       break;
-    case "a-z":
+    case "A-Z":
       filteredGameCardList = filteredGameCardList.sort((a, b) =>
         a.title.localeCompare(b.title)
       );
       break;
-    case "z-a":
+    case "Z-A":
       filteredGameCardList = filteredGameCardList.sort((a, b) =>
         b.title.localeCompare(a.title)
       );
