@@ -10,13 +10,15 @@ export const useFilterSort = () => {
   const { selectedFilters, selectedSort } = useAppContext();
 
   const getFilteredGameCards = (gameCards: GameCardProps[]) => {
-    const filters = selectedFilters;
-    if (filters.length === 0) {
-      return gameCards;
-    }
-    return gameCards.filter(
-      (card) => filters.includes(card.genre) || filters.includes(card.platform)
-    );
+    return gameCards.filter((card) => {
+      const filters = selectedFilters;
+      return (
+        filters.length === 0 ||
+        filters.some(
+          (filter) => card.genre === filter || card.platform === filter
+        )
+      );
+    });
   };
 
   let filteredGameCardList = getFilteredGameCards(gameData || []);

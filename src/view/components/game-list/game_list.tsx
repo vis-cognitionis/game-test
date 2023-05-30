@@ -16,20 +16,16 @@ const GameList = () => {
   const { refetch } = useGameData();
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
-  const renderItem = useMemo(
-    () =>
-      ({ item }: { item: GameCardProps }) => {
-        return (
-          <GameCard
-            gameCategory={item.genre}
-            gamePlatform={item.platform}
-            gameTitle={item.title}
-            imgSrc={item.thumbnail}
-          />
-        );
-      },
-    []
-  );
+  const renderItem = useCallback(({ item }: { item: GameCardProps }) => {
+    return (
+      <GameCard
+        gameCategory={item.genre}
+        gamePlatform={item.platform}
+        gameTitle={item.title}
+        imgSrc={item.thumbnail}
+      />
+    );
+  }, []);
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
@@ -88,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameList;
+export default React.memo(GameList);
