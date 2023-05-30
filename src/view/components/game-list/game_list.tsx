@@ -33,6 +33,7 @@ const GameList = () => {
       renderItem={renderItem}
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
