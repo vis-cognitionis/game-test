@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   RefreshControl,
   StyleSheet,
@@ -16,16 +16,20 @@ const GameList = () => {
   const { refetch } = useGameData();
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
-  const renderItem = ({ item }: { item: GameCardProps }) => {
-    return (
-      <GameCard
-        gameCategory={item.genre}
-        gamePlatform={item.platform}
-        gameTitle={item.title}
-        imgSrc={item.thumbnail}
-      />
-    );
-  };
+  const renderItem = useMemo(
+    () =>
+      ({ item }: { item: GameCardProps }) => {
+        return (
+          <GameCard
+            gameCategory={item.genre}
+            gamePlatform={item.platform}
+            gameTitle={item.title}
+            imgSrc={item.thumbnail}
+          />
+        );
+      },
+    []
+  );
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
