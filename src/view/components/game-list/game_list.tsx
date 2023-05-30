@@ -1,13 +1,14 @@
-import React, { useMemo } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import React, { useCallback, useMemo, useState } from "react";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 
 import GameCard from "./game_card";
 import GameCardProps from "../../../interface/interface";
 import { useFilterSort } from "../../../custom-hook/useFilterSort";
+import { useGameData } from "../../../queries/useGameData";
 
 const GameList = () => {
   const { filteredGameCardList } = useFilterSort();
-
+  const { refetch } = useGameData();
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
   const renderItem = useMemo(
@@ -25,6 +26,16 @@ const GameList = () => {
     []
   );
 
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      refetch();
+    }, 2000);
+  }, []);
+
   return (
     <FlatList
       style={styles.container}
@@ -33,6 +44,9 @@ const GameList = () => {
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}
       showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     />
   );
 };
