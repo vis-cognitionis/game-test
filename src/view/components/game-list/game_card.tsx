@@ -55,6 +55,7 @@ const GameCard = ({
     }
     return title;
   };
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: imgSrc }} />

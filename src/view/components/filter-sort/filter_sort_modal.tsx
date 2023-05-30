@@ -8,14 +8,11 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Pressable,
-  ViewStyle,
-  FlexStyle,
-  TextStyle,
 } from "react-native";
 
 import Chip from "./chip";
 import { useGameData } from "../../../queries/useGameData";
+import FilterAction from "./filter_action";
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -82,17 +79,6 @@ const styles = StyleSheet.create({
     rowGap: 18,
     width: "100%",
   },
-
-  filterAction: {
-    width: "45%",
-    height: 40,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FC4C02",
-    borderRadius: 50,
-    paddingHorizontal: 10,
-  },
 });
 
 interface FilterSortModalProps {
@@ -140,30 +126,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-    );
-  };
-
-  const FilterAction = ({
-    customStyles,
-    textColor,
-    onPress,
-    name,
-  }: {
-    customStyles: ViewStyle | FlexStyle;
-    textColor: TextStyle;
-    onPress: () => void;
-    name: string;
-  }) => {
-    return (
-      <Pressable
-        onPress={() => {
-          onPress();
-          handleModalClose();
-        }}
-        style={[styles.filterAction, customStyles]}
-      >
-        <Text style={[textColor]}> {name} </Text>
-      </Pressable>
     );
   };
 
@@ -231,13 +193,17 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
               >
                 <FilterAction
                   customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
-                  onPress={() => {}}
+                  onPress={() => {
+                    handleModalClose();
+                  }}
                   textColor={{ color: "#FC4C02", fontWeight: "bold" }}
                   name="Reset"
                 />
                 <FilterAction
                   customStyles={{ backgroundColor: "#FC4C02" }}
-                  onPress={() => {}}
+                  onPress={() => {
+                    handleModalClose();
+                  }}
                   textColor={{ color: "white" }}
                   name="Apply"
                 />
