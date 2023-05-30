@@ -8,8 +8,14 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Pressable,
+  ViewStyle,
+  FlexStyle,
+  TextStyle,
 } from "react-native";
+
 import Chip from "./chip";
+import { useGameData } from "../../../queries/useGameData";
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -26,7 +32,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     padding: 28,
-    height: 380,
+    paddingBottom: "12%",
+    minHeight: 380,
+    height: "auto",
   },
 
   chipContainer: {
@@ -49,7 +57,7 @@ const styles = StyleSheet.create({
     width: 104,
     height: 25,
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 15,
     color: "#000000",
   },
 
@@ -57,14 +65,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 1,
     backgroundColor: "rgba(156, 152, 152, 0.47);",
-    margin: 14,
+    margin: 12,
   },
 
   rowItemContainer: {
     display: "flex",
     flexDirection: "column",
-    rowGap: 8,
-    height: 70,
+    height: 60,
     justifyContent: "center",
   },
 
@@ -72,8 +79,19 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignSelf: "flex-start",
-    rowGap: 24,
+    rowGap: 18,
     width: "100%",
+  },
+
+  filterAction: {
+    width: "45%",
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FC4C02",
+    borderRadius: 50,
+    paddingHorizontal: 10,
   },
 });
 
@@ -84,6 +102,7 @@ interface FilterSortModalProps {
 
 const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
   const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
+  const { gameData } = useGameData();
 
   const handleModalClose = () => {
     Animated.timing(translateY, {
@@ -124,6 +143,41 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     );
   };
 
+  const FilterAction = ({
+    customStyles,
+    textColor,
+    onPress,
+    name,
+  }: {
+    customStyles: ViewStyle | FlexStyle;
+    textColor: TextStyle;
+    onPress: () => void;
+    name: string;
+  }) => {
+    return (
+      <Pressable
+        onPress={() => {
+          onPress();
+          handleModalClose();
+        }}
+        style={[styles.filterAction, customStyles]}
+      >
+        <Text style={[textColor]}> {name} </Text>
+      </Pressable>
+    );
+  };
+
+  const categories =
+    gameData && Array.from(new Set(gameData.map((game) => game.genre)));
+
+  const platforms =
+    gameData && Array.from(new Set(gameData.map((game) => game.platform)));
+
+  const sortItems = [
+    { item: "Popularity" },
+    { item: "Relevance" },
+    { item: "Alphabetical" },
+  ];
   return (
     <Modal visible={visible} transparent animationType="none">
       <TouchableWithoutFeedback onPress={handleModalClose}>
@@ -136,20 +190,57 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
               <View style={styles.line} />
               <View style={styles.rowItemsContainer}>
                 <RowItem
-                  children={
-                    <>
-                      <Chip />
-                      <Chip />
-                      <Chip />
-                      <Chip />
-                      <Chip />
-                      <Chip />
-                    </>
-                  }
+                  children={categories?.map((category) => (
+                    <Chip
+                      key={category}
+                      content={category}
+                      onPress={() => {}}
+                    />
+                  ))}
                   title="Categories"
                 />
-                <RowItem children={<Chip />} title="Platforms" />
-                <RowItem children={<Chip />} title="Sort" />
+                <RowItem
+                  children={platforms?.map((platform) => (
+                    <Chip
+                      key={platform}
+                      content={platform}
+                      onPress={() => {}}
+                    />
+                  ))}
+                  title="Platforms"
+                />
+                <RowItem
+                  children={sortItems?.map((sort) => (
+                    <Chip
+                      key={sort.item}
+                      content={sort.item}
+                      onPress={() => {}}
+                    />
+                  ))}
+                  title="Sort"
+                />
+              </View>
+              <View style={styles.line} />
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <FilterAction
+                  customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
+                  onPress={() => {}}
+                  textColor={{ color: "#FC4C02", fontWeight: "bold" }}
+                  name="Reset"
+                />
+                <FilterAction
+                  customStyles={{ backgroundColor: "#FC4C02" }}
+                  onPress={() => {}}
+                  textColor={{ color: "white" }}
+                  name="Apply"
+                />
               </View>
             </Animated.View>
           </TouchableWithoutFeedback>

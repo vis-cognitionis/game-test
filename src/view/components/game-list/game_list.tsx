@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 const GameList = () => {
-  const data = useGameData();
+  const { gameData } = useGameData();
 
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
@@ -29,7 +29,7 @@ const GameList = () => {
   return (
     <FlatList
       style={styles.container}
-      data={data?.gameData!}
+      data={gameData!}
       renderItem={renderItem}
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}
