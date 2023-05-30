@@ -2,8 +2,8 @@ import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 import GameCard from "./game_card";
-import GameProps from "../../../interface/interface";
-import { useGameData } from "../../../queries/useGameData";
+import GameCardProps from "../../../interface/interface";
+import { useFilterSort } from "../../../custom-hook/useFilterSort";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,11 +13,10 @@ const styles = StyleSheet.create({
 });
 
 const GameList = () => {
-  const { gameData } = useGameData();
-
+  const { filteredGameCardList } = useFilterSort();
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
-  const renderItem = ({ item }: { item: GameProps }) => (
+  const renderItem = ({ item }: { item: GameCardProps }) => (
     <GameCard
       gameCategory={item.genre}
       gamePlatform={item.platform}
@@ -29,7 +28,7 @@ const GameList = () => {
   return (
     <FlatList
       style={styles.container}
-      data={gameData!}
+      data={filteredGameCardList}
       renderItem={renderItem}
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}

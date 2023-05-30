@@ -1,4 +1,4 @@
-export default interface GameProps {
+export default interface GameCardProps {
   id: number;
   title: string;
   thumbnail: string;

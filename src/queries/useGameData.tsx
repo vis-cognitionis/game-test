@@ -1,14 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import GameProps from "../interface/interface";
+import GameCardProps from "../interface/interface";
 
 export const useGameData = () => {
   const {
     data: gameData,
     isLoading,
     refetch,
-  } = useQuery<GameProps[]>(
+  } = useQuery<GameCardProps[]>(
     ["gameData"],
     async () => {
       const response = await axios.get("https://www.freetogame.com/api/games");

@@ -56,14 +56,14 @@ const Header = ({
           <IconFilterSort />
         </Pressable>
       </View>
-      <FlatList
+      {/* <FlatList
         horizontal
         contentContainerStyle={styles.chipContainer}
         data={mockData}
         renderItem={({ item }) => <Chip key={item.id} />}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={{ marginRight: 20 }} />}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
