@@ -22,6 +22,14 @@ interface FilterSortModalProps {
 const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
   const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
   const { gameData } = useGameData();
+  const {
+    setSelectedFilters,
+    setSelectedSort,
+    chipsSelectedFilters,
+    setChipsSelectedFilters,
+    chipsSelectedSorts,
+    setChipsSelectedSorts,
+  } = useAppContext();
 
   const handleModalClose = () => {
     Animated.timing(translateY, {
@@ -69,15 +77,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     gameData && Array.from(new Set(gameData.map((game) => game.platform)));
 
   const sortItems = ["Latest Release", "Oldest Release", "A-Z", "Z-A"];
-
-  const {
-    setSelectedFilters,
-    setSelectedSort,
-    chipsSelectedFilters,
-    setChipsSelectedFilters,
-    chipsSelectedSorts,
-    setChipsSelectedSorts,
-  } = useAppContext();
 
   const handleFilter = (item: string) => {
     const updatedSelectedFilters = chipsSelectedFilters.includes(item)
