@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 import GameCard from "./game_card";
@@ -7,13 +7,18 @@ import { useFilterSort } from "../../../custom-hook/useFilterSort";
 
 const styles = StyleSheet.create({
   container: {
-    height: "80%",
+    height: "82%",
     paddingHorizontal: 24,
   },
 });
 
 const GameList = () => {
   const { filteredGameCardList } = useFilterSort();
+  const memoizedFilteredGameCardList = useMemo(
+    () => filteredGameCardList,
+    [filteredGameCardList]
+  );
+
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
   const renderItem = ({ item }: { item: GameCardProps }) => (
@@ -28,7 +33,7 @@ const GameList = () => {
   return (
     <FlatList
       style={styles.container}
-      data={filteredGameCardList}
+      data={memoizedFilteredGameCardList}
       renderItem={renderItem}
       ItemSeparatorComponent={itemSeparator}
       keyExtractor={(item) => item.id.toString()}

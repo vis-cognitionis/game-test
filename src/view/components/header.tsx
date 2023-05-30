@@ -25,6 +25,32 @@ const Header = ({
     setChipsSelectedSorts,
   } = useAppContext();
 
+  const styles = StyleSheet.create({
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      paddingVertical: 0,
+      paddingHorizontal: 24,
+      height: selectedFilters.length < 1 && !selectedSort ? 70 : 100,
+    },
+    headerContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    chipContainer: {
+      paddingTop: 16,
+    },
+    button: {
+      justifyContent: "center",
+      paddingLeft: 9,
+      width: 36,
+      height: 36,
+      borderRadius: 12,
+      backgroundColor: "rgba(252, 76, 2, 0.35)",
+    },
+  });
+
   const chips = selectedFilters
     .concat(selectedSort ? [selectedSort] : [])
     .reverse();
@@ -66,7 +92,7 @@ const Header = ({
             onPressClose={() => handleReset(item)}
           />
         )}
-        keyExtractor={(item) => item}
+        keyExtractor={(item, index) => `${item}-${index}`}
         ItemSeparatorComponent={() => <View style={{ marginRight: 8 }} />}
         showsHorizontalScrollIndicator={false}
       />
@@ -75,29 +101,3 @@ const Header = ({
 };
 
 export default Header;
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    height: 100,
-    paddingVertical: 0,
-    paddingHorizontal: 24,
-  },
-  headerContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  chipContainer: {
-    paddingTop: 16,
-  },
-  button: {
-    justifyContent: "center",
-    paddingLeft: 9,
-    width: 36,
-    height: 36,
-    borderRadius: 12,
-    backgroundColor: "rgba(252, 76, 2, 0.35)",
-  },
-});
