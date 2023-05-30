@@ -4,11 +4,14 @@ import {
   Pressable,
   SafeAreaView,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 
 import { IconFilterSort, IconGameTest } from "./icons";
 import { useAppContext } from "../../view-model/app_context";
+import { useFilterSort } from "../../custom-hook/useFilterSort";
+import { useGameData } from "../../queries/useGameData";
 import Chip from "./filter-sort/chip";
 
 const Header = ({
@@ -25,22 +28,25 @@ const Header = ({
     setChipsSelectedSorts,
   } = useAppContext();
 
+  const { filteredGameCardList } = useFilterSort();
+  const { gameData } = useGameData();
+
   const styles = StyleSheet.create({
     container: {
       display: "flex",
       flexDirection: "column",
       paddingVertical: 0,
       paddingHorizontal: 24,
-      height: selectedFilters.length < 1 && !selectedSort ? 70 : 100,
+      height: selectedFilters.length < 1 && !selectedSort ? 80 : 120,
+      gap: 12,
     },
+
     headerContainer: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
     },
-    chipContainer: {
-      paddingTop: 16,
-    },
+
     button: {
       justifyContent: "center",
       paddingLeft: 9,
@@ -48,6 +54,13 @@ const Header = ({
       height: 36,
       borderRadius: 12,
       backgroundColor: "rgba(252, 76, 2, 0.35)",
+    },
+
+    result: {
+      paddingLeft: 4,
+      color: "#FC4C02",
+      fontSize: 12,
+      fontWeight: "bold",
     },
   });
 
@@ -78,10 +91,12 @@ const Header = ({
           <IconFilterSort />
         </Pressable>
       </View>
+      <Text style={styles.result}>
+        {gameData && filteredGameCardList.length + " / " + gameData.length}
+      </Text>
 
       <FlatList
         horizontal
-        contentContainerStyle={styles.chipContainer}
         data={chips}
         renderItem={({ item }) => (
           <Chip

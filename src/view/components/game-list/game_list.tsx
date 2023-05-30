@@ -1,50 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  Animated,
-  Easing,
-} from "react-native";
+import React, { useMemo } from "react";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 
 import GameCard from "./game_card";
 import GameCardProps from "../../../interface/interface";
 import { useFilterSort } from "../../../custom-hook/useFilterSort";
-import { useGameData } from "../../../queries/useGameData";
 
 const GameList = () => {
   const { filteredGameCardList } = useFilterSort();
-  const { isLoading } = useGameData();
-  const [fadeAnim] = useState<Animated.Value>(new Animated.Value(0));
-
-  const animateLoading = () => {
-    if (isLoading) {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 500,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 500,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-        ]),
-        { iterations: -1 }
-      ).start();
-    } else {
-      fadeAnim.setValue(0);
-    }
-  };
-
-  useEffect(() => {
-    animateLoading();
-  }, [isLoading]);
 
   const itemSeparator = () => <View style={{ height: 24 }} />;
 
@@ -63,35 +25,16 @@ const GameList = () => {
     []
   );
 
-  const renderLoading = () => {
-    const opacity = fadeAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0.3, 1],
-    });
-
-    return (
-      <View style={styles.loadingContainer}>
-        <Animated.View style={[styles.loadingContainer, { opacity }]}>
-          <ActivityIndicator size="large" color="#FC4C02" />
-        </Animated.View>
-      </View>
-    );
-  };
-
-  if (isLoading) {
-    return renderLoading();
-  } else {
-    return (
-      <FlatList
-        style={styles.container}
-        data={filteredGameCardList}
-        renderItem={renderItem}
-        ItemSeparatorComponent={itemSeparator}
-        keyExtractor={(item) => item.id.toString()}
-        showsVerticalScrollIndicator={false}
-      />
-    );
-  }
+  return (
+    <FlatList
+      style={styles.container}
+      data={filteredGameCardList}
+      renderItem={renderItem}
+      ItemSeparatorComponent={itemSeparator}
+      keyExtractor={(item) => item.id.toString()}
+      showsVerticalScrollIndicator={false}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
