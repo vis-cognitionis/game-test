@@ -13,27 +13,6 @@ import GameCardProps from "../../../interface/interface";
 import { useFilterSort } from "../../../custom-hook/useFilterSort";
 import { useGameData } from "../../../queries/useGameData";
 
-const styles = StyleSheet.create({
-  container: {
-    height: "82%",
-    paddingHorizontal: 24,
-  },
-
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    minHeight: "40%",
-  },
-
-  lazyComponent: {
-    height: 110,
-    width: "100%",
-    backgroundColor: "#D9D9D9",
-    borderRadius: 16,
-  },
-});
-
 const GameList = () => {
   const { filteredGameCardList } = useFilterSort();
   const { isLoading } = useGameData();
@@ -114,5 +93,26 @@ const GameList = () => {
     );
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: "82%",
+    paddingHorizontal: 24,
+  },
+
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    minHeight: "40%",
+  },
+
+  lazyComponent: {
+    height: 110,
+    width: "100%",
+    backgroundColor: "#D9D9D9",
+    borderRadius: 16,
+  },
+});
 
 export default GameList;

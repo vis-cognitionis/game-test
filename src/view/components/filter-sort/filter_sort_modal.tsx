@@ -20,8 +20,16 @@ interface FilterSortModalProps {
 }
 
 const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
-  const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
   const { gameData } = useGameData();
+  const {
+    setSelectedFilters,
+    setSelectedSort,
+    chipsSelectedFilters,
+    setChipsSelectedFilters,
+    chipsSelectedSorts,
+    setChipsSelectedSorts,
+  } = useAppContext();
+  const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
 
   const handleModalClose = () => {
     Animated.timing(translateY, {
@@ -43,25 +51,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     }
   }, [visible, translateY]);
 
-  const RowItem = useMemo(
-    () =>
-      ({ title, children }: { title: string; children: React.ReactNode }) => {
-        return (
-          <View style={styles.rowItemContainer}>
-            <Text style={styles.subheading}>{title}</Text>
-            <ScrollView
-              contentContainerStyle={styles.chipContainer}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {children}
-            </ScrollView>
-          </View>
-        );
-      },
-    []
-  );
-
   const categories =
     gameData && Array.from(new Set(gameData.map((game) => game.genre)));
 
@@ -69,15 +58,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     gameData && Array.from(new Set(gameData.map((game) => game.platform)));
 
   const sortItems = ["Latest Release", "Oldest Release", "A-Z", "Z-A"];
-
-  const {
-    setSelectedFilters,
-    setSelectedSort,
-    chipsSelectedFilters,
-    setChipsSelectedFilters,
-    chipsSelectedSorts,
-    setChipsSelectedSorts,
-  } = useAppContext();
 
   const handleFilter = (item: string) => {
     const updatedSelectedFilters = chipsSelectedFilters.includes(item)
@@ -110,8 +90,27 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
       handleModalClose();
   };
 
-  return (
-    <Modal visible={visible} transparent animationType="none">
+  const RowItem = useMemo(
+    () =>
+      ({ title, children }: { title: string; children: React.ReactNode }) => {
+        return (
+          <View style={styles.rowItemContainer}>
+            <Text style={styles.subheading}>{title}</Text>
+            <ScrollView
+              contentContainerStyle={styles.chipContainer}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {children}
+            </ScrollView>
+          </View>
+        );
+      },
+    []
+  );
+
+  const ModalContent = () => {
+    return (
       <TouchableWithoutFeedback
         onPress={() => {
           handleModalClose();
@@ -126,55 +125,38 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
               <Text style={styles.title}>Filter & Sort</Text>
               <View style={styles.line} />
               <View style={styles.rowItemsContainer}>
-                <RowItem
-                  children={categories?.map((category) => (
-                    <Chip
-                      key={category}
-                      content={category}
-                      onPress={() => {
-                        handleFilter(category);
-                      }}
-                      selected={chipsSelectedFilters.includes(category)}
-                    />
-                  ))}
-                  title="Categories"
-                />
-                <RowItem
-                  children={platforms?.map((platform) => (
-                    <Chip
-                      key={platform}
-                      content={platform}
-                      selected={chipsSelectedFilters.includes(platform)}
-                      onPress={() => {
-                        handleFilter(platform);
-                      }}
-                    />
-                  ))}
-                  title="Platforms"
-                />
-                <RowItem
-                  children={sortItems?.map((sort) => (
-                    <Chip
-                      key={sort}
-                      content={sort}
-                      selected={chipsSelectedSorts.includes(sort)}
-                      onPress={() => {
-                        handleSort(sort);
-                      }}
-                    />
-                  ))}
-                  title="Sort"
-                />
+                {[
+                  {
+                    data: categories,
+                    title: "Categories",
+                    filterHandler: handleFilter,
+                  },
+                  {
+                    data: platforms,
+                    title: "Platforms",
+                    filterHandler: handleFilter,
+                  },
+                  { data: sortItems, title: "Sort", filterHandler: handleSort },
+                ].map(({ data, title, filterHandler }) => (
+                  <RowItem key={title} title={title}>
+                    {data?.map((item) => (
+                      <Chip
+                        key={item}
+                        content={item}
+                        selected={
+                          title === "Sort"
+                            ? chipsSelectedSorts.includes(item)
+                            : chipsSelectedFilters.includes(item)
+                        }
+                        onPress={() => filterHandler(item)}
+                      />
+                    ))}
+                  </RowItem>
+                ))}
               </View>
+
               <View style={styles.line} />
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
+              <View style={styles.filterAction}>
                 <FilterAction
                   customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
                   onPress={handleReset}
@@ -192,6 +174,12 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
+    );
+  };
+
+  return (
+    <Modal visible={visible} transparent animationType="none">
+      <ModalContent />
     </Modal>
   );
 };
@@ -263,6 +251,13 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     overflow: "hidden",
+  },
+
+  filterAction: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
 });
 

@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, View, Text } from "react-native";
+
+import LoadingAnimationView from "./loading_animation";
+
+export interface CardProps {
+  imgSrc: string;
+  gameTitle: string;
+  gamePlatform: string;
+  gameCategory: string;
+}
+
+const GameCard = ({
+  imgSrc,
+  gameTitle,
+  gamePlatform,
+  gameCategory,
+}: CardProps) => {
+  const limitTitle = (title: string, limit: number) => {
+    if (title.length > limit) {
+      return title.slice(0, limit) + "...";
+    }
+    return title;
+  };
+
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+
+  return (
+    <View style={styles.container}>
+      {imageLoading && <LoadingAnimationView />}
+      <Image
+        style={styles.image}
+        source={{ uri: imgSrc }}
+        onLoad={() => setImageLoading(false)}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.textTitle}>{limitTitle(gameTitle, 11)}</Text>
+        <Text> {gamePlatform} </Text>
+        <Text> {gameCategory} </Text>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
-    // justifyContent: "space-between",
     alignItems: "center",
     width: 342,
     maxWidth: 342,
@@ -33,38 +73,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 16,
   },
-  textContent: {},
 });
 
-export interface CardProps {
-  imgSrc: string;
-  gameTitle: string;
-  gamePlatform: string;
-  gameCategory: string;
-}
-
-const GameCard = ({
-  imgSrc,
-  gameTitle,
-  gamePlatform,
-  gameCategory,
-}: CardProps) => {
-  const limitTitle = (title: string, limit: number) => {
-    if (title.length > limit) {
-      return title.slice(0, limit) + "...";
-    }
-    return title;
-  };
-
-  return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: imgSrc }} />
-      <View style={styles.textContainer}>
-        <Text style={styles.textTitle}>{limitTitle(gameTitle, 11)}</Text>
-        <Text> {gamePlatform} </Text>
-        <Text> {gameCategory} </Text>
-      </View>
-    </View>
-  );
-};
 export default GameCard;
