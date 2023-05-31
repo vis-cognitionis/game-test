@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-
-import { useGameData } from "../../../queries/useGameData";
+import { Image, StyleSheet, View, Text, useColorScheme } from "react-native";
 
 export interface CardProps {
   imgSrc: string;
@@ -24,6 +22,50 @@ const GameCard = ({
   };
 
   const [imageLoading, setImageLoading] = useState<boolean>(true);
+  const isDarkMode = useColorScheme() === "dark";
+  const styles = StyleSheet.create({
+    container: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: 342,
+      maxWidth: 342,
+      height: 110,
+      gap: 12,
+      boxSizing: "border-box",
+      overflow: "hidden",
+    },
+
+    textContainer: {
+      display: "flex",
+      flexDirection: "column",
+    },
+
+    image: {
+      width: 196,
+      height: 112,
+      borderRadius: 16,
+    },
+    textTitle: {
+      overflow: "hidden",
+      width: "100%",
+      fontSize: 18,
+      color: isDarkMode ? "#DEDEDE" : "#424242",
+      fontWeight: "bold",
+      paddingBottom: 16,
+    },
+
+    textContent: {
+      color: isDarkMode ? "#DEDEDE" : "#424242",
+    },
+
+    loadingBox: {
+      width: "100%",
+      height: 110,
+      borderRadius: 16,
+      backgroundColor: "rgba(252, 76, 2, 0.4)",
+    },
+  });
   return (
     <View style={styles.container}>
       {imageLoading && <View style={styles.loadingBox} />}
@@ -35,51 +77,11 @@ const GameCard = ({
 
       <View style={styles.textContainer}>
         <Text style={styles.textTitle}>{limitTitle(gameTitle, 11)}</Text>
-        <Text> {gamePlatform} </Text>
-        <Text> {gameCategory} </Text>
+        <Text style={styles.textContent}> {gamePlatform} </Text>
+        <Text style={styles.textContent}> {gameCategory} </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    width: 342,
-    maxWidth: 342,
-    height: 110,
-    gap: 12,
-    boxSizing: "border-box",
-    overflow: "hidden",
-  },
-
-  textContainer: {
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  image: {
-    width: 196,
-    height: 112,
-    borderRadius: 16,
-  },
-  textTitle: {
-    overflow: "hidden",
-    width: "100%",
-    fontSize: 18,
-    color: "#424242",
-    fontWeight: "bold",
-    paddingBottom: 16,
-  },
-
-  loadingBox: {
-    width: "100%",
-    height: 110,
-    borderRadius: 16,
-    backgroundColor: "rgba(252, 76, 2, 0.4)",
-  },
-});
 
 export default GameCard;

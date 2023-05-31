@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  useColorScheme,
 } from "react-native";
 
 import { IconFilterSort, IconGameTest } from "./icons";
@@ -30,6 +31,7 @@ const Header = ({
 
   const { filteredGameCardList } = useFilterSort();
   const { gameData } = useGameData();
+  const isDarkMode = useColorScheme() === "dark";
 
   const styles = StyleSheet.create({
     container: {
@@ -53,7 +55,7 @@ const Header = ({
       width: 36,
       height: 36,
       borderRadius: 12,
-      backgroundColor: "rgba(252, 76, 2, 0.35)",
+      backgroundColor: isDarkMode ? "#FC4C02" : "rgba(252, 76, 2, 0.35)",
     },
 
     result: {
