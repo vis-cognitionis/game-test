@@ -63,7 +63,7 @@ const GameCard = ({
       width: "100%",
       height: 110,
       borderRadius: 16,
-      backgroundColor: "rgba(252, 76, 2, 0.4)",
+      backgroundColor: "rgba(252, 76, 2, 0.15)",
     },
   });
   return (
