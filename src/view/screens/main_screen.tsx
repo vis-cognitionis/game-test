@@ -6,15 +6,15 @@ import GameList from "../components/game-list/game_list";
 import FilterSortModal from "../components/filter-sort/filter_sort_modal";
 
 const MainScreen = () => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalOpen, setFilterModalOpen] = useState<boolean>(false);
 
   return (
     <SafeAreaView>
-      <Header setModalOpen={setModalOpen} />
+      <Header setFilterModalOpen={setFilterModalOpen} />
       <GameList />
       <FilterSortModal
         visible={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => setFilterModalOpen(false)}
       />
     </SafeAreaView>
   );

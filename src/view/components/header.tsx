@@ -9,16 +9,16 @@ import {
   useColorScheme,
 } from "react-native";
 
-import { IconFilterSort, IconGameTest } from "./icons";
+import { IconFilterSort, IconGameTest, IconStats } from "./icons";
 import { useAppContext } from "../../view-model/app_context";
 import { useFilterSort } from "../../custom-hook/useFilterSort";
 import { useGameData } from "../../queries/useGameData";
 import Chip from "./filter-sort/chip";
 
 const Header = ({
-  setModalOpen,
+  setFilterModalOpen,
 }: {
-  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  setFilterModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const {
     selectedFilters,
@@ -51,7 +51,7 @@ const Header = ({
 
     button: {
       justifyContent: "center",
-      paddingLeft: 9,
+      alignItems: "center",
       width: 36,
       height: 36,
       borderRadius: 12,
@@ -89,9 +89,20 @@ const Header = ({
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <IconGameTest />
-        <Pressable style={styles.button} onPress={() => setModalOpen(true)}>
-          <IconFilterSort />
-        </Pressable>
+        <View style={{ display: "flex", flexDirection: "row", gap: 14 }}>
+          <Pressable
+            style={styles.button}
+            onPress={() => setFilterModalOpen(true)}
+          >
+            <IconFilterSort />
+          </Pressable>
+          <Pressable
+            style={styles.button}
+            // onPress={() => setStatsModalOpen(true)}
+          >
+            <IconStats />
+          </Pressable>
+        </View>
       </View>
       <Text style={styles.result}>
         {gameData && filteredGameCardList.length + " / " + gameData.length}
