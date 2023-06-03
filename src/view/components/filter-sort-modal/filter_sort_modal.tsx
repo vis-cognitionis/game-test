@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import Modal from "../../../core/components/modal/modal";
-import ActionButtons from "./filter_action_buttons";
+import ActionButtons from "./action_buttons";
 import FilterSection from "./filter_section";
 import SortSection from "./sort_section";
-import { useAppContext } from "../../../view-model/app_context";
+import { useAppContext } from "../../../state/app_context";
 import { styles } from "./filter_sort.styles";
 
 interface FilterSortModalProps {

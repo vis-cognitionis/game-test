@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 import { styles } from "./filter_sort.styles";
-import { useAppContext } from "../../../view-model/app_context";
+import { useAppContext } from "../../../state/app_context";
 import ActionButton from "../../../core/components/buttons/action_button";
 import colors from "../../../core/constants/colors";
 

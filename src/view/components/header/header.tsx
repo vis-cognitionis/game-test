@@ -2,9 +2,9 @@ import React, { SetStateAction } from "react";
 import { SafeAreaView, Text, View } from "react-native";
 
 import { IconGameTest } from "../../../core/components/icons/icons";
-import { useAppContext } from "../../../view-model/app_context";
-import { useFilterSort } from "../../../custom-hook/useFilterSort";
-import { useGameData } from "../../../queries/useGameData";
+import { useAppContext } from "../../../state/app_context";
+import { useFilterSort } from "../../../hooks/useFilterSort";
+import { useGameData } from "../../../data/useGameData";
 import { HeaderStyles } from "./header.styles";
 import HeaderIcons from "./header_icons";
 import HeaderChips from "./header_chips";

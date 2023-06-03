@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 
-import { useAppContext } from "../view-model/app_context";
-import { useGameData } from "../queries/useGameData";
-import GameCardProps from "../interface/interface";
+import { useAppContext } from "../state/app_context";
+import { useGameData } from "../data/useGameData";
+import GameCardProps from "../interface/data_types";
 
 export const useFilterSort = () => {
   const { gameData } = useGameData();

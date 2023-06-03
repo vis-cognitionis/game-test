@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList } from "react-native";
 
-import { useAppContext } from "../../../view-model/app_context";
+import { useAppContext } from "../../../state/app_context";
 import Chip from "../../../core/components/chip/chip";
 
 const HeaderChips = () => {

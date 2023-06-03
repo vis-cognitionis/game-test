@@ -1,8 +1,8 @@
 import React from "react";
 
 import Chip from "../../../core/components/chip/chip";
-import RowItem from "./filter_row_item";
-import { useAppContext } from "../../../view-model/app_context";
+import RowItem from "./row_item";
+import { useAppContext } from "../../../state/app_context";
 
 const SortSection = () => {
   const { chipsSelectedSorts, setChipsSelectedSorts } = useAppContext();

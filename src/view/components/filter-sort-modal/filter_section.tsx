@@ -2,9 +2,9 @@ import React from "react";
 import { View } from "react-native";
 
 import Chip from "../../../core/components/chip/chip";
-import RowItem from "./filter_row_item";
-import { useGameData } from "../../../queries/useGameData";
-import { useAppContext } from "../../../view-model/app_context";
+import RowItem from "./row_item";
+import { useGameData } from "../../../data/useGameData";
+import { useAppContext } from "../../../state/app_context";
 import { styles } from "./filter_sort.styles";
 
 const FilterSection = () => {

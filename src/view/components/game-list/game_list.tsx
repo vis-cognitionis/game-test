@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { RefreshControl, View, VirtualizedList } from "react-native";
 
-import GameCardProps from "../../../interface/interface";
+import GameCardProps from "../../../interface/data_types";
 import Card from "../../../core/components/card/card";
-import { useFilterSort } from "../../../custom-hook/useFilterSort";
-import { useGameData } from "../../../queries/useGameData";
+import { useFilterSort } from "../../../hooks/useFilterSort";
+import { useGameData } from "../../../data/useGameData";
 import { styles } from "./game_list.styles";
 
 const GameList = () => {
