@@ -3,8 +3,8 @@ import { SafeAreaView } from "react-native";
 
 import Header from "../components/header/header";
 import GameList from "../components/game-list/game_list";
-import StatsModal from "../components/stats/stats_modal";
-import FilterSortModal from "../components/filter-sort/filter_sort_modal";
+import StatsModal from "../components/stats-modal/stats_modal";
+import FilterSortModal from "../components/filter-sort-modal/filter_sort_modal";
 
 const MainScreen = () => {
   const [modalVisible, setModalVisible] = useState<string>("");

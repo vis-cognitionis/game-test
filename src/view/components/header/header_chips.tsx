@@ -19,13 +19,19 @@ const HeaderChips = () => {
     .reverse();
 
   const handleResetFilters = (item: string) => {
-    const updatedFilters = selectedFilters.filter((filter) => filter !== item);
-    setSelectedFilters(updatedFilters);
-    setChipsSelectedFilters(updatedFilters);
-    setSelectedSort("");
-    setChipsSelectedSorts([]);
+    {
+      if (selectedFilters.includes(item)) {
+        const updatedFilters = selectedFilters.filter(
+          (filter) => filter !== item
+        );
+        setSelectedFilters(updatedFilters);
+        setChipsSelectedFilters(updatedFilters);
+      } else if (selectedSort === item) {
+        setSelectedSort("");
+        setChipsSelectedSorts([]);
+      }
+    }
   };
-
   return (
     <FlatList
       horizontal
