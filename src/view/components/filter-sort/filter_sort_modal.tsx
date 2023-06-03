@@ -1,18 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
-import {
-  View,
-  Modal,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Animated,
-  Text,
-  ScrollView,
-} from "react-native";
+import React, { useMemo } from "react";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 
 import { useGameData } from "../../../queries/useGameData";
 import { useAppContext } from "../../../view-model/app_context";
 import FilterAction from "./filter_action";
 import Chip from "./chip";
+import Modal from "../../../core/modal/modal";
 
 interface FilterSortModalProps {
   visible: boolean;
@@ -20,7 +13,6 @@ interface FilterSortModalProps {
 }
 
 const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
-  const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
   const { gameData } = useGameData();
   const {
     setSelectedFilters,
@@ -30,26 +22,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     chipsSelectedSorts,
     setChipsSelectedSorts,
   } = useAppContext();
-
-  const handleModalClose = () => {
-    Animated.timing(translateY, {
-      toValue: 500,
-      duration: 100,
-      useNativeDriver: true,
-    }).start(() => {
-      onClose();
-    });
-  };
-
-  useEffect(() => {
-    if (visible) {
-      Animated.timing(translateY, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [visible, translateY]);
 
   const RowItem = useMemo(
     () =>
@@ -95,7 +67,7 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
   };
 
   const handleApply = () => {
-    handleModalClose();
+    onClose();
     setSelectedFilters(chipsSelectedFilters);
     setSelectedSort(chipsSelectedSorts[0]);
   };
@@ -106,85 +78,77 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
     setSelectedFilters([]);
     setSelectedSort("");
     (chipsSelectedFilters.length > 0 || chipsSelectedSorts.length > 0) &&
-      handleModalClose();
+      onClose();
   };
 
   return (
-    <Modal visible={visible} transparent animationType="none">
-      <TouchableWithoutFeedback
-        onPress={() => {
-          handleModalClose();
-          handleApply();
-        }}
-      >
-        <View style={styles.modalContainer}>
-          <TouchableWithoutFeedback>
-            <Animated.View
-              style={[styles.contentContainer, { transform: [{ translateY }] }]}
-            >
-              <Text style={styles.title}>Filter & Sort</Text>
-              <View style={styles.line} />
-              <View style={styles.rowItemsContainer}>
-                <RowItem
-                  children={categories?.map((category) => (
-                    <Chip
-                      key={category}
-                      content={category}
-                      onPress={() => {
-                        handleFilter(category);
-                      }}
-                      selected={chipsSelectedFilters.includes(category)}
-                    />
-                  ))}
-                  title="Categories"
+    <Modal
+      children={
+        <>
+          <Text style={styles.title}>Filter & Sort</Text>
+          <View style={styles.line} />
+          <View style={styles.rowItemsContainer}>
+            <RowItem
+              children={categories?.map((category) => (
+                <Chip
+                  key={category}
+                  content={category}
+                  onPress={() => {
+                    handleFilter(category);
+                  }}
+                  selected={chipsSelectedFilters.includes(category)}
                 />
-                <RowItem
-                  children={platforms?.map((platform) => (
-                    <Chip
-                      key={platform}
-                      content={platform}
-                      selected={chipsSelectedFilters.includes(platform)}
-                      onPress={() => {
-                        handleFilter(platform);
-                      }}
-                    />
-                  ))}
-                  title="Platforms"
+              ))}
+              title="Categories"
+            />
+            <RowItem
+              children={platforms?.map((platform) => (
+                <Chip
+                  key={platform}
+                  content={platform}
+                  selected={chipsSelectedFilters.includes(platform)}
+                  onPress={() => {
+                    handleFilter(platform);
+                  }}
                 />
-                <RowItem
-                  children={sortItems?.map((sort) => (
-                    <Chip
-                      key={sort}
-                      content={sort}
-                      selected={chipsSelectedSorts.includes(sort)}
-                      onPress={() => {
-                        handleSort(sort);
-                      }}
-                    />
-                  ))}
-                  title="Sort"
+              ))}
+              title="Platforms"
+            />
+            <RowItem
+              children={sortItems?.map((sort) => (
+                <Chip
+                  key={sort}
+                  content={sort}
+                  selected={chipsSelectedSorts.includes(sort)}
+                  onPress={() => {
+                    handleSort(sort);
+                  }}
                 />
-              </View>
-              <View style={styles.line} />
-              <View style={styles.filterAction}>
-                <FilterAction
-                  customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
-                  onPress={handleReset}
-                  textColor={{ color: "#FC4C02", fontWeight: "bold" }}
-                  name="Reset"
-                />
-                <FilterAction
-                  customStyles={{ backgroundColor: "#FC4C02" }}
-                  onPress={handleApply}
-                  textColor={{ color: "white" }}
-                  name="Apply"
-                />
-              </View>
-            </Animated.View>
-          </TouchableWithoutFeedback>
-        </View>
-      </TouchableWithoutFeedback>
-    </Modal>
+              ))}
+              title="Sort"
+            />
+          </View>
+          <View style={styles.line} />
+          <View style={styles.filterAction}>
+            <FilterAction
+              customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
+              onPress={handleReset}
+              textColor={{ color: "#FC4C02", fontWeight: "bold" }}
+              name="Reset"
+            />
+            <FilterAction
+              customStyles={{ backgroundColor: "#FC4C02" }}
+              onPress={handleApply}
+              textColor={{ color: "white" }}
+              name="Apply"
+            />
+          </View>
+        </>
+      }
+      handleApply={() => handleApply()}
+      onClose={() => onClose()}
+      visible={visible}
+    />
   );
 };
 

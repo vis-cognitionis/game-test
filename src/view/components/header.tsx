@@ -17,8 +17,10 @@ import Chip from "./filter-sort/chip";
 
 const Header = ({
   setFilterModalOpen,
+  setStatsModalOpen,
 }: {
   setFilterModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  setStatsModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const {
     selectedFilters,
@@ -98,7 +100,7 @@ const Header = ({
           </Pressable>
           <Pressable
             style={styles.button}
-            // onPress={() => setStatsModalOpen(true)}
+            onPress={() => setStatsModalOpen(true)}
           >
             <IconStats />
           </Pressable>
