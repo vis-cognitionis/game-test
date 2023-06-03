@@ -1,15 +1,11 @@
 import React, { useCallback, useState } from "react";
-import {
-  RefreshControl,
-  StyleSheet,
-  View,
-  VirtualizedList,
-} from "react-native";
+import { RefreshControl, View, VirtualizedList } from "react-native";
 
-import GameCard from "./game_card";
 import GameCardProps from "../../../interface/interface";
+import Card from "../../../core/components/card/card";
 import { useFilterSort } from "../../../custom-hook/useFilterSort";
 import { useGameData } from "../../../queries/useGameData";
+import { styles } from "./game_list.styles";
 
 const GameList = () => {
   const { filteredGameCardList } = useFilterSort();
@@ -18,7 +14,7 @@ const GameList = () => {
 
   const renderItem = useCallback(({ item }: { item: GameCardProps }) => {
     return (
-      <GameCard
+      <Card
         gameCategory={item.genre}
         gamePlatform={item.platform}
         gameTitle={item.title}
@@ -41,6 +37,7 @@ const GameList = () => {
     () => filteredGameCardList.length,
     [filteredGameCardList]
   );
+
   const getItem = useCallback(
     (_: any, index: number) => filteredGameCardList[index],
     [filteredGameCardList]
@@ -62,26 +59,5 @@ const GameList = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: "82%",
-    paddingHorizontal: 24,
-  },
-
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    minHeight: "40%",
-  },
-
-  lazyComponent: {
-    height: 110,
-    width: "100%",
-    backgroundColor: "#D9D9D9",
-    borderRadius: 16,
-  },
-});
 
 export default React.memo(GameList);
