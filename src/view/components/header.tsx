@@ -1,7 +1,6 @@
 import React, { SetStateAction } from "react";
 import {
   FlatList,
-  Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -19,6 +18,7 @@ import { useFilterSort } from "../../custom-hook/useFilterSort";
 import { useGameData } from "../../queries/useGameData";
 import Chip from "../../core/components/chip/chip";
 import colors from "../../core/constants/colors";
+import Button from "../../core/components/buttons/button";
 
 const Header = ({
   setModalVisible,
@@ -95,18 +95,14 @@ const Header = ({
       <View style={styles.headerContainer}>
         <IconGameTest />
         <View style={{ display: "flex", flexDirection: "row", gap: 14 }}>
-          <Pressable
-            style={styles.button}
+          <Button
+            children={<IconFilterSort />}
             onPress={() => setModalVisible("filter_sort")}
-          >
-            <IconFilterSort />
-          </Pressable>
-          <Pressable
-            style={styles.button}
+          />
+          <Button
+            children={<IconStats />}
             onPress={() => setModalVisible("stats")}
-          >
-            <IconStats />
-          </Pressable>
+          />
         </View>
       </View>
       <Text style={styles.result}>

@@ -3,10 +3,10 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 
 import { useGameData } from "../../../queries/useGameData";
 import { useAppContext } from "../../../view-model/app_context";
-import FilterAction from "./filter_action";
 import Modal from "../../../core/components/modal/modal";
 import Chip from "../../../core/components/chip/chip";
 import colors from "../../../core/constants/colors";
+import ActionButton from "../../../core/components/buttons/action_button";
 
 interface FilterSortModalProps {
   visible: boolean;
@@ -131,13 +131,13 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
           </View>
           <View style={styles.line} />
           <View style={styles.filterAction}>
-            <FilterAction
+            <ActionButton
               customStyles={{ backgroundColor: "rgba(252, 76, 2, 0.2)" }}
               onPress={handleReset}
               textColor={{ color: colors.primaryDark, fontWeight: "bold" }}
               name="Reset"
             />
-            <FilterAction
+            <ActionButton
               customStyles={{ backgroundColor: colors.primaryDark }}
               onPress={handleApply}
               textColor={{ color: "white" }}
