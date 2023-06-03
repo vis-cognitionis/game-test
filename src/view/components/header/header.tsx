@@ -1,24 +1,17 @@
 import React, { SetStateAction } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  useColorScheme,
-} from "react-native";
+import { FlatList, SafeAreaView, Text, View } from "react-native";
 
 import {
   IconFilterSort,
   IconGameTest,
   IconStats,
-} from "../../core/components/icons/icons";
-import { useAppContext } from "../../view-model/app_context";
-import { useFilterSort } from "../../custom-hook/useFilterSort";
-import { useGameData } from "../../queries/useGameData";
-import Chip from "../../core/components/chip/chip";
-import colors from "../../core/constants/colors";
-import Button from "../../core/components/buttons/button";
+} from "../../../core/components/icons/icons";
+import { useAppContext } from "../../../view-model/app_context";
+import { useFilterSort } from "../../../custom-hook/useFilterSort";
+import { useGameData } from "../../../queries/useGameData";
+import { HeaderStyles } from "./header.styles";
+import Button from "../../../core/components/buttons/button";
+import Chip from "../../../core/components/chip/chip";
 
 const Header = ({
   setModalVisible,
@@ -36,40 +29,6 @@ const Header = ({
 
   const { filteredGameCardList } = useFilterSort();
   const { gameData } = useGameData();
-  const isDarkMode = useColorScheme() === "dark";
-
-  const styles = StyleSheet.create({
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      paddingVertical: 0,
-      paddingHorizontal: 24,
-      height: selectedFilters.length < 1 && !selectedSort ? 80 : 120,
-      gap: 12,
-    },
-
-    headerContainer: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
-
-    button: {
-      justifyContent: "center",
-      alignItems: "center",
-      width: 36,
-      height: 36,
-      borderRadius: 12,
-      backgroundColor: isDarkMode ? colors.primaryDark : colors.primaryLight,
-    },
-
-    result: {
-      paddingLeft: 4,
-      color: colors.primaryDark,
-      fontSize: 12,
-      fontWeight: "bold",
-    },
-  });
 
   const chips = selectedFilters
     .concat(selectedSort ? [selectedSort] : [])
@@ -89,6 +48,8 @@ const Header = ({
       }
     }
   };
+
+  const styles = HeaderStyles({ selectedFilters, selectedSort });
 
   return (
     <SafeAreaView style={styles.container}>
