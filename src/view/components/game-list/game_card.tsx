@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, View, Text, useColorScheme } from "react-native";
+import colors from "../../../core/constants/colors";
 
 export interface CardProps {
   imgSrc: string;
@@ -50,13 +51,13 @@ const GameCard = ({
       overflow: "hidden",
       width: "100%",
       fontSize: 18,
-      color: isDarkMode ? "#DEDEDE" : "#424242",
+      color: isDarkMode ? colors.tertiary : colors.secondary,
       fontWeight: "bold",
       paddingBottom: 16,
     },
 
     textContent: {
-      color: isDarkMode ? "#DEDEDE" : "#424242",
+      color: isDarkMode ? colors.tertiary : colors.secondary,
     },
 
     loadingBox: {

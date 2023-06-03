@@ -9,18 +9,21 @@ import {
   useColorScheme,
 } from "react-native";
 
-import { IconFilterSort, IconGameTest, IconStats } from "./icons";
+import {
+  IconFilterSort,
+  IconGameTest,
+  IconStats,
+} from "../../core/components/icons/icons";
 import { useAppContext } from "../../view-model/app_context";
 import { useFilterSort } from "../../custom-hook/useFilterSort";
 import { useGameData } from "../../queries/useGameData";
-import Chip from "./filter-sort/chip";
+import Chip from "../../core/components/chip/chip";
+import colors from "../../core/constants/colors";
 
 const Header = ({
-  setFilterModalOpen,
-  setStatsModalOpen,
+  setModalVisible,
 }: {
-  setFilterModalOpen: React.Dispatch<SetStateAction<boolean>>;
-  setStatsModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  setModalVisible: React.Dispatch<SetStateAction<string>>;
 }) => {
   const {
     selectedFilters,
@@ -57,12 +60,12 @@ const Header = ({
       width: 36,
       height: 36,
       borderRadius: 12,
-      backgroundColor: isDarkMode ? "#FC4C02" : "rgba(252, 76, 2, 0.35)",
+      backgroundColor: isDarkMode ? colors.primaryDark : colors.primaryLight,
     },
 
     result: {
       paddingLeft: 4,
-      color: "#FC4C02",
+      color: colors.primaryDark,
       fontSize: 12,
       fontWeight: "bold",
     },
@@ -94,13 +97,13 @@ const Header = ({
         <View style={{ display: "flex", flexDirection: "row", gap: 14 }}>
           <Pressable
             style={styles.button}
-            onPress={() => setFilterModalOpen(true)}
+            onPress={() => setModalVisible("filter_sort")}
           >
             <IconFilterSort />
           </Pressable>
           <Pressable
             style={styles.button}
-            onPress={() => setStatsModalOpen(true)}
+            onPress={() => setModalVisible("stats")}
           >
             <IconStats />
           </Pressable>

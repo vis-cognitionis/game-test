@@ -3,27 +3,23 @@ import { SafeAreaView } from "react-native";
 
 import Header from "../components/header";
 import GameList from "../components/game-list/game_list";
-import FilterSortModal from "../components/filter-sort/filter_sort_modal";
 import StatsModal from "../components/stats/stats_modal";
+import FilterSortModal from "../components/filter-sort/filter_sort_modal";
 
 const MainScreen = () => {
-  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
-  const [statsModalOpen, setStatsModalOpen] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState<string>("");
 
   return (
     <SafeAreaView>
-      <Header
-        setStatsModalOpen={setStatsModalOpen}
-        setFilterModalOpen={setFilterModalOpen}
-      />
+      <Header setModalVisible={setModalVisible} />
       <GameList />
       <FilterSortModal
-        visible={filterModalOpen}
-        onClose={() => setFilterModalOpen(false)}
+        visible={Boolean(modalVisible === "filter_sort")}
+        onClose={() => setModalVisible("")}
       />
       <StatsModal
-        visible={statsModalOpen}
-        onClose={() => setStatsModalOpen(false)}
+        visible={Boolean(modalVisible === "stats")}
+        onClose={() => setModalVisible("")}
       />
     </SafeAreaView>
   );

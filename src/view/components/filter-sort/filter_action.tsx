@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import colors from "../../../core/constants/colors";
 
 interface FilterActionProps {
   customStyles: ViewStyle | FlexStyle;
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FC4C02",
+    backgroundColor: colors.primaryDark,
     borderRadius: 50,
     paddingHorizontal: 10,
   },

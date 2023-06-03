@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colors from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   modalContainer: {
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
     height: 25,
     fontWeight: "bold",
     fontSize: 18,
-    color: "#FC4C02",
+    color: colors.primaryDark,
   },
 
   subheading: {
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
     height: 25,
     fontWeight: "bold",
     fontSize: 15,
-    color: "#000000",
+    color: colors.black,
   },
 
   line: {
