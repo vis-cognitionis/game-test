@@ -1,4 +1,4 @@
-const groupMissions = (data: { [key: string]: any }) => {
+const groupData = (data: { [key: string]: any }) => {
   const result = [];
 
   const groupedData = Object.values(data).reduce((acc, mission) => {
@@ -27,4 +27,4 @@ const groupMissions = (data: { [key: string]: any }) => {
   return result;
 };
 
-export default groupMissions;
+export default groupData;

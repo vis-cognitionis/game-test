@@ -3,7 +3,6 @@ import colors from "../../../core/constants/colors";
 
 export const styles = StyleSheet.create({
   title: {
-    width: 104,
     height: 25,
     fontWeight: "bold",
     fontSize: 18,
@@ -18,6 +17,7 @@ export const styles = StyleSheet.create({
   },
 
   chartsContainer: {
+    display: "flex",
     flexDirection: "column",
     marginTop: 10,
   },
@@ -31,9 +31,10 @@ export const styles = StyleSheet.create({
   },
 
   gameId: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 20,
     fontWeight: "bold",
+    textTransform: "capitalize",
   },
 
   graphContainer: {
@@ -66,12 +67,6 @@ export const styles = StyleSheet.create({
     fontSize: 10,
   },
 
-  total: {
-    fontSize: 12,
-    color: "black",
-    marginTop: 5,
-  },
-
   statsContainer: {
     flexDirection: "row",
     marginTop: 5,
@@ -91,11 +86,6 @@ export const styles = StyleSheet.create({
   },
 
   stats: {
-    fontSize: 12,
-    color: colors.black,
-  },
-
-  statsValue: {
     fontSize: 12,
     color: colors.black,
   },

@@ -4,8 +4,8 @@ import { View, Text } from "react-native";
 import { styles } from "./stats_chart.style";
 import colors from "../../../core/constants/colors";
 
-const StatsChartItem = ({ mission }: any) => {
-  const { wins, fails, playTime, gameId } = mission;
+const StatsChartItem = ({ data }: any) => {
+  const { wins, fails, playTime, gameId } = data;
   const max = Math.max(wins, fails);
   const yAxisValues = [];
 

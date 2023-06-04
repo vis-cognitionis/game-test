@@ -1,28 +1,29 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 
-import groupMissions from "./functions/group_mission";
+import groupData from "./functions/group_data";
+import StatsChartItem from "./stats_chart_item";
 import { statsData } from "./data/data";
 import { styles } from "./stats_chart.style";
-import StatsChartItem from "./stats_chart_item";
 
-const StatsChart = () => {
-  const missions = groupMissions(statsData);
+const StatsChartList = () => {
+  const statsDataArr = groupData(statsData);
 
   return (
     <>
-      <Text style={styles.title}>Statistics</Text>
+      <Text style={styles.title}> Game Statistics</Text>
       <View style={styles.line} />
+
       <ScrollView
         contentContainerStyle={styles.chartsContainer}
         showsVerticalScrollIndicator={false}
       >
-        {missions.map((mission, index) => (
-          <StatsChartItem key={index} mission={mission} />
+        {statsDataArr.map((data, index) => (
+          <StatsChartItem key={index} data={data} />
         ))}
       </ScrollView>
     </>
   );
 };
 
-export default StatsChart;
+export default StatsChartList;

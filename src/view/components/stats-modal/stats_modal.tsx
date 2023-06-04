@@ -1,7 +1,7 @@
 import React from "react";
 
 import Modal from "../../../core/components/modal/modal";
-import StatsChart from "./stats_chart";
+import StatsChartList from "./stats_chart_list";
 
 interface StatsModalProps {
   visible: boolean;
@@ -10,7 +10,7 @@ interface StatsModalProps {
 
 const StatsModal = ({ visible, onClose }: StatsModalProps) => {
   return (
-    <Modal children={<StatsChart />} onClose={onClose} visible={visible} />
+    <Modal children={<StatsChartList />} onClose={onClose} visible={visible} />
   );
 };
 export default StatsModal;
