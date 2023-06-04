@@ -5,7 +5,7 @@ const colors = {
   tertiary: "#DEDEDE",
   black: "#000000",
   white: "#FFFFFF",
-  wins: "#455636",
+  wins: "#608F4F",
   fails: "#F43219",
 };
 

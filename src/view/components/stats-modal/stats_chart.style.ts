@@ -17,42 +17,42 @@ export const styles = StyleSheet.create({
     margin: 12,
   },
 
-  chartContainer: {
+  chartsContainer: {
     flexDirection: "column",
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: "red",
+    marginTop: 10,
   },
 
   gameContainer: {
-    marginBottom: 40,
+    marginBottom: 24,
     alignItems: "center",
+    backgroundColor: "rgba(252, 76, 2, 0.1)",
+    paddingVertical: 20,
+    borderRadius: 20,
   },
 
   gameId: {
     fontSize: 16,
+    marginBottom: 20,
     fontWeight: "bold",
-    marginBottom: 10,
   },
 
   graphContainer: {
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-    width: "60%",
+    width: "70%",
     height: 100,
     borderLeftWidth: 1,
     borderBottomWidth: 1,
-    borderColor: "black",
+    borderColor: colors.black,
   },
 
-  axis: {
+  bar: {
     width: 30,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-    marginLeft: "12%",
-    marginRight: "12%",
+    marginLeft: "14%",
+    marginRight: "14%",
   },
 
   yAxis: {
@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: "row",
     marginTop: 5,
+    gap: 67,
   },
 
   statsText: {
@@ -82,5 +83,26 @@ export const styles = StyleSheet.create({
     color: "black",
     marginLeft: "8%",
     marginRight: "8%",
+  },
+
+  statsTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  stats: {
+    fontSize: 12,
+    color: colors.black,
+  },
+
+  statsValue: {
+    fontSize: 12,
+    color: colors.black,
+  },
+
+  playTimeText: {
+    fontSize: 12,
+    color: colors.black,
+    marginTop: 10,
   },
 });
