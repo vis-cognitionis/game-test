@@ -36,7 +36,7 @@ The capabilities of React and the code principles were applied as follows:
 
 This project is a game-test React Native TypeScript application. In the first step, a home screen interface where the games are listed was designed in Figma. A logo and name for the app were also determined. The possibility of having a few essential components was considered: gameCard and chips as buttons for filtering. For filtering and sorting operations in a mobile app, a bottom modal screen was chosen. The user can select desired filters from this modal to apply filtering and sorting. Additionally, the selected filters can be viewed at the top of the main list page and closed individually.
 
-The capabilities of React were applied as follows:
+The capabilities of React and the code principles were applied as follows:
 
 - Usage of functional components and hooks
 - Managing necessary states across the application using `ContextAPI` and a `provider`
