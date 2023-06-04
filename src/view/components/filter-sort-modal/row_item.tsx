@@ -6,6 +6,7 @@ interface RowItemProps {
   title: string;
   children: React.ReactNode;
 }
+
 const RowItem = ({ title, children }: RowItemProps) => {
   return (
     <View style={styles.rowItemContainer}>

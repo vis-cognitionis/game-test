@@ -1,10 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import Button from "../../../core/components/buttons/button";
+
 import {
   IconFilterSort,
   IconStats,
 } from "../../../core/components/icons/icons";
+import Button from "../../../core/components/buttons/button/button";
 
 const HeaderIcons = ({
   setModalVisible,

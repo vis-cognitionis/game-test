@@ -6,7 +6,7 @@ import MainScreen from "./src/view/screens/main_screen";
 import AppProvider from "./src/state/app_context";
 import { queryClient } from "./src/data/query_client";
 
-function App(): JSX.Element {
+function App() {
   LogBox.ignoreAllLogs(true);
 
   return (

@@ -1,10 +1,10 @@
 import React from "react";
 import { View } from "react-native";
 
-import { styles } from "./filter_sort.styles";
-import { useAppContext } from "../../../state/app_context";
-import ActionButton from "../../../core/components/buttons/action_button";
+import ActionButton from "../../../core/components/buttons/action-button/action_button";
 import colors from "../../../core/constants/colors";
+import { useAppContext } from "../../../state/app_context";
+import { styles } from "./filter_sort.styles";
 
 interface ActionButtonsProps {
   onClose: () => void;

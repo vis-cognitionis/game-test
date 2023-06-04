@@ -1,5 +1,6 @@
 import React from "react";
 import { ViewStyle, FlexStyle, TextStyle, Pressable, Text } from "react-native";
+
 import { styles } from "./action_button.styles";
 
 interface ActionButtonProps {
@@ -20,7 +21,7 @@ const ActionButton = ({
       onPress={() => {
         onPress();
       }}
-      style={[styles.filterAction, customStyles]}
+      style={[styles.action, customStyles]}
     >
       <Text style={[textColor]}> {name} </Text>
     </Pressable>

@@ -1,5 +1,5 @@
 import { StyleSheet, useColorScheme } from "react-native";
-import colors from "../../constants/colors";
+import colors from "../../../constants/colors";
 
 export const ButtonStyles = () => {
   const isDarkMode = useColorScheme() === "dark";
