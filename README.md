@@ -15,20 +15,22 @@ To install and run the app on your local machine, follow these steps:
 <li> <a href="https://reactnative.dev/" target="_blank">React Native</a></li> 
 <li> <a href="https://beta.reactjs.org/" target="_blank">React</a></li> 
 <li> <a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a> </li> 
+<li> <a href="https://prettier.io/" target="_blank">Prettier</a> </li> 
 <li> <a href="https://www.freetogame.com/api-doc/" target="_blank">FreeToGame API</a> </li> 
 <li> <a href="https://tanstack.com/query/latest" target="_blank">TanStack React Query</a> </li> 
 
 ## Project Structure
 
-The project is organized into the following directories:
+The capabilities of React and the code principles were applied as follows:
 
 - `assets`: Contains images
 - `src`: Contains the source code for the app
-- `custom-hook`: Contains filtering and sorting functions 
+- `core`: Contains reusable components and constant colors in the project
+- `data`: Contains react query functions that allow data from API to be managed from a single place
+- `hooks`: Contains filtering and sorting custom hook functions 
 - `inteface`: Contains interface object corresponding to data from API
-- `queries`: Contains react query functions that allow data from API to be managed from a single place
+- `state`: Contains ContextAPI and provider constructs that manage states used in components in the project
 - `view`: Contains the components and screens of the project
-- `view-model`: Contains ContextAPI and provider constructs that manage states used in components in the project
 
 ## Project Overview
 
@@ -39,8 +41,10 @@ The capabilities of React were applied as follows:
 - Usage of functional components and hooks
 - Managing necessary states across the application using `ContextAPI` and a `provider`
 - Efficient utilization of filtering and sorting functions using `custom hooks` and making them accessible from all components
+- A component has only one responsibility in accordance with the `Single Responsibility Principle 
+- Separation of code structure into sub components and styled components by simplified
 - Improving performance by using `VirtualizedList` and `React.memo` as well as `useMemo` and `useCallback` hooks in components
-- Furthermore, the fetched data was managed from a single source using the `@tanstack/react-query` library.
+- Furthermore, the fetched data was managed from a single source using the `@tanstack/react-query` library
 
 ## Screenshots
 
@@ -69,6 +73,7 @@ Here are some example screenshots of the app:
 </div>
   <br>
   <br>
+  
 
 <div align="center">
   <img src="assets/images/filter_selected.png" width="500" height="auto">
@@ -78,10 +83,19 @@ Here are some example screenshots of the app:
   <br>
   <br>
 
-<div align="center">
+  <div align="center">
   <img src="assets/images/dark_theme.png" width="500" height="auto">
   <br>
   <em>Dark theme view</em>
+</div>
+  <br>
+  <br>
+
+
+<div align="center">
+  <img src="assets/images/stats_modal.png" width="250" height="auto">
+  <br>
+  <em>The modal screen showing the statistics of the games in comparison</em>
 </div>
   <br>
   <br>
