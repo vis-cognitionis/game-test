@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 
 import groupData from "./functions/group_data";
 import StatsChartItem from "./stats_chart_item";
@@ -13,14 +13,15 @@ const StatsChartList = () => {
     <>
       <Text style={styles.title}> Game Statistics</Text>
       <View style={styles.line} />
-
       <ScrollView
         contentContainerStyle={styles.chartsContainer}
         showsVerticalScrollIndicator={false}
       >
-        {statsDataArr.map((data, index) => (
-          <StatsChartItem key={index} data={data} />
-        ))}
+        <TouchableOpacity activeOpacity={1}>
+          {statsDataArr.map((data, index) => (
+            <StatsChartItem key={index} data={data} />
+          ))}
+        </TouchableOpacity>
       </ScrollView>
     </>
   );
