@@ -8,6 +8,7 @@ import { styles } from "./stats_chart.style";
 
 const StatsChartList = () => {
   const statsDataArr = groupData(statsData);
+  console.log("problem's output:", statsDataArr);
 
   return (
     <ScrollView
