@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   gameContainer: {
     marginBottom: 24,
     alignItems: "center",
-    backgroundColor: "rgba(252,76, 2, 0.1)",
+    backgroundColor: "rgba(185, 122, 96, 0.1)",
     paddingVertical: 20,
     borderRadius: 20,
   },
