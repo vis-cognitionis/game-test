@@ -30,11 +30,12 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    width: 104,
+    width: "100%",
     height: 25,
     fontWeight: "bold",
     fontSize: 18,
     color: colors.primaryDark,
+    textAlign: "center",
   },
 
   subheading: {

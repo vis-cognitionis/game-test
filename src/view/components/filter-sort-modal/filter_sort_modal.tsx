@@ -29,10 +29,12 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
 
   return (
     <Modal
+      modalTitle="Filter & Sort"
+      handleApply={() => handleApply()}
+      onClose={() => onClose()}
+      visible={visible}
       children={
         <>
-          <Text style={styles.title}>Filter & Sort</Text>
-          <View style={styles.line} />
           <View style={styles.rowItemsContainer}>
             <FilterSection />
             <SortSection />
@@ -42,9 +44,6 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
           <ActionButtons onClose={onClose} handleApply={handleApply} />
         </>
       }
-      handleApply={() => handleApply()}
-      onClose={() => onClose()}
-      visible={visible}
     />
   );
 };

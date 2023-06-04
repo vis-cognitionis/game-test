@@ -4,6 +4,7 @@ import {
   Modal as ReactNativeModal,
   TouchableWithoutFeedback,
   Animated,
+  Text,
 } from "react-native";
 
 import { styles } from "./modal.styles";
@@ -13,6 +14,7 @@ interface CustomModalProps {
   onClose: () => void;
   handleApply?: () => void;
   children: React.ReactNode;
+  modalTitle: string;
 }
 
 const Modal = ({
@@ -20,6 +22,7 @@ const Modal = ({
   onClose,
   handleApply,
   children,
+  modalTitle,
 }: CustomModalProps) => {
   const translateY = useState<Animated.Value>(new Animated.Value(500))[0];
 
@@ -56,6 +59,8 @@ const Modal = ({
             <Animated.View
               style={[styles.contentContainer, { transform: [{ translateY }] }]}
             >
+              <Text style={styles.title}>{modalTitle}</Text>
+              <View style={styles.line} />
               {children}
             </Animated.View>
           </TouchableWithoutFeedback>
