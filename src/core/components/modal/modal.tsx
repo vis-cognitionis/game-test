@@ -11,7 +11,7 @@ import { styles } from "./modal.styles";
 interface CustomModalProps {
   visible: boolean;
   onClose: () => void;
-  handleApply: () => void;
+  handleApply?: () => void;
   children: React.ReactNode;
 }
 
@@ -48,7 +48,7 @@ const Modal = ({
       <TouchableWithoutFeedback
         onPress={() => {
           handleModalClose();
-          handleApply();
+          handleApply && handleApply();
         }}
       >
         <View style={styles.modalContainer}>
