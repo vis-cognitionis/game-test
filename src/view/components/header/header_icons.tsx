@@ -1,3 +1,4 @@
+import React from "react";
 import { View } from "react-native";
 import Button from "../../../core/components/buttons/button";
 import {
@@ -12,14 +13,12 @@ const HeaderIcons = ({
 }) => {
   return (
     <View style={{ display: "flex", flexDirection: "row", gap: 14 }}>
-      <Button
-        children={<IconFilterSort />}
-        onPress={() => setModalVisible("filter_sort")}
-      />
-      <Button
-        children={<IconStats />}
-        onPress={() => setModalVisible("stats")}
-      />
+      <Button onPress={() => setModalVisible("filter_sort")}>
+        <IconFilterSort />
+      </Button>
+      <Button onPress={() => setModalVisible("stats")}>
+        <IconStats />
+      </Button>
     </View>
   );
 };

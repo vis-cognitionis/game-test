@@ -18,8 +18,8 @@ const SortSection = () => {
   };
 
   return (
-    <RowItem
-      children={sortItems?.map((sort) => (
+    <RowItem title="Sort">
+      {sortItems?.map((sort) => (
         <Chip
           key={sort}
           content={sort}
@@ -29,8 +29,7 @@ const SortSection = () => {
           }}
         />
       ))}
-      title="Sort"
-    />
+    </RowItem>
   );
 };
 

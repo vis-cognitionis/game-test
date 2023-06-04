@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import Modal from "../../../core/components/modal/modal";
 import ActionButtons from "./action_buttons";
@@ -33,18 +33,15 @@ const FilterSortModal = ({ visible, onClose }: FilterSortModalProps) => {
       handleApply={() => handleApply()}
       onClose={() => onClose()}
       visible={visible}
-      children={
-        <>
-          <View style={styles.rowItemsContainer}>
-            <FilterSection />
-            <SortSection />
-          </View>
+    >
+      <View style={styles.rowItemsContainer}>
+        <FilterSection />
+        <SortSection />
+      </View>
 
-          <View style={styles.line} />
-          <ActionButtons onClose={onClose} handleApply={handleApply} />
-        </>
-      }
-    />
+      <View style={styles.line} />
+      <ActionButtons onClose={onClose} handleApply={handleApply} />
+    </Modal>
   );
 };
 

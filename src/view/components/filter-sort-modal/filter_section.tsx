@@ -27,8 +27,8 @@ const FilterSection = () => {
 
   return (
     <View style={styles.rowItemsContainer}>
-      <RowItem
-        children={categories?.map((category) => (
+      <RowItem title="Categories">
+        {categories?.map((category) => (
           <Chip
             key={category}
             content={category}
@@ -38,10 +38,9 @@ const FilterSection = () => {
             selected={chipsSelectedFilters.includes(category)}
           />
         ))}
-        title="Categories"
-      />
-      <RowItem
-        children={platforms?.map((platform) => (
+      </RowItem>
+      <RowItem title="Platforms">
+        {platforms?.map((platform) => (
           <Chip
             key={platform}
             content={platform}
@@ -51,8 +50,7 @@ const FilterSection = () => {
             }}
           />
         ))}
-        title="Platforms"
-      />
+      </RowItem>
     </View>
   );
 };

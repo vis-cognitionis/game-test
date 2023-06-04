@@ -10,12 +10,9 @@ interface StatsModalProps {
 
 const StatsModal = ({ visible, onClose }: StatsModalProps) => {
   return (
-    <Modal
-      modalTitle="Game Statistics"
-      children={<StatsChartList />}
-      onClose={onClose}
-      visible={visible}
-    />
+    <Modal modalTitle="Game Statistics" onClose={onClose} visible={visible}>
+      <StatsChartList />
+    </Modal>
   );
 };
 export default StatsModal;

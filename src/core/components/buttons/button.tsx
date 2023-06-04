@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FlexStyle,
-  GestureResponderEvent,
-  Pressable,
-  ViewStyle,
-} from "react-native";
+import { FlexStyle, Pressable, ViewStyle } from "react-native";
 
 import { ButtonStyles } from "./button.styles";
 
@@ -14,7 +9,7 @@ const Button = ({
   customStyles,
 }: {
   children: React.ReactNode;
-  onPress: ((event: GestureResponderEvent) => void) | null | undefined;
+  onPress: (() => void) | null | undefined;
   customStyles?: ViewStyle | FlexStyle;
 }) => {
   const styles = ButtonStyles();
