@@ -41,7 +41,7 @@ The capabilities of React were applied as follows:
 - Usage of functional components and hooks
 - Managing necessary states across the application using `ContextAPI` and a `provider`
 - Efficient utilization of filtering and sorting functions using `custom hooks` and making them accessible from all components
-- A component has only one responsibility in accordance with the `Single Responsibility Principle 
+- A component has only one responsibility in accordance with the `Single Responsibility Principle`
 - Separation of code structure into sub components and styled components by simplified
 - Improving performance by using `VirtualizedList` and `React.memo` as well as `useMemo` and `useCallback` hooks in components
 - Furthermore, the fetched data was managed from a single source using the `@tanstack/react-query` library
