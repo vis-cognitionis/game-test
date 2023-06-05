@@ -28,7 +28,7 @@ The capabilities of React and the code principles were applied as follows:
 - `core`: Contains reusable components and constant colors in the project
 - `data`: Contains react query functions that allow data from API to be managed from a single place
 - `hooks`: Contains filtering and sorting custom hook functions 
-- `inteface`: Contains interface object corresponding to data from API
+- `interface`: Contains interface object corresponding to data from API
 - `state`: Contains ContextAPI and provider constructs that manage states used in components in the project
 - `view`: Contains the components and screens of the project
 
